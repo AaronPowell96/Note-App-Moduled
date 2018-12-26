@@ -3,9 +3,7 @@ console.log(noteId);
 
 let notes = getSavedNotes();
 
-let note = notes.find(function(note) {
-  return note.id === noteId;
-});
+let note = notes.find(note => note.id === noteId);
 
 if (note === undefined) {
   location.assign("/index.html");
