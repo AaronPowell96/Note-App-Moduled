@@ -34,7 +34,7 @@ const generateNoteDOM = note => {
   //setup remove note button
   button.textContent = "x";
   noteEl.appendChild(button);
-  button.addEventListener("click", function() {
+  button.addEventListener("click", () => {
     removeNotes(note.id);
     saveNotes(notes);
     renderNotes(notes, filters);
@@ -53,7 +53,7 @@ const generateNoteDOM = note => {
 //sort notes by one of the filters
 const sortNotes = (notes, sortBy) => {
   if (sortBy === "byEdited") {
-    return notes.sort(function(a, b) {
+    return notes.sort((a, b) => {
       if (a.updatedAt > b.updatedAt) {
         return -1;
       } else if (a.updatedAt < b.updatedAt) {
@@ -63,7 +63,7 @@ const sortNotes = (notes, sortBy) => {
       }
     });
   } else if (sortBy === "byCreated") {
-    return notes.sort(function(a, b) {
+    return notes.sort((a, b) => {
       if (a.createdAt > b.createdAt) {
         return -1;
       } else if (a.createdAt < b.createdAt) {
@@ -73,7 +73,7 @@ const sortNotes = (notes, sortBy) => {
       }
     });
   } else if (sortBy === "byAlphabet") {
-    return notes.sort(function(a, b) {
+    return notes.sort((a, b) => {
       if (a.title.toLowerCase() < b.title.toLowerCase()) {
         return -1;
       } else if (a.title.toLowerCase() > b.title.toLowerCase()) {
@@ -89,12 +89,12 @@ const sortNotes = (notes, sortBy) => {
 
 const renderNotes = (notes, filters) => {
   notes = sortNotes(notes, filters.sortBy);
-  const filteredNotes = notes.filter(function(note) {
-    return note.title.toLowerCase().includes(filters.searchText.toLowerCase());
-  });
+  const filteredNotes = notes.filter(note =>
+    note.title.toLowerCase().includes(filters.searchText.toLowerCase())
+  );
 
   document.querySelector("#notesDiv").innerHTML = "";
-  filteredNotes.forEach(function(note) {
+  filteredNotes.forEach(note => {
     const noteEl = generateNoteDOM(note);
     document.querySelector("#notesDiv").appendChild(noteEl);
   });

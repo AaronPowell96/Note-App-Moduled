@@ -17,36 +17,36 @@ noteBody.value = note.body;
 console.log(moment(note.updatedAt).fromNow());
 noteUpdated.textContent = generateLastEdited(note.updatedAt);
 
-noteTitle.addEventListener("input", function(e) {
+noteTitle.addEventListener("input", e => {
   note.title = e.target.value;
   note.updatedAt = moment().valueOf();
   noteUpdated.textContent = generateLastEdited(note.updatedAt);
   saveNotes(notes);
 });
 
-noteBody.addEventListener("input", function(e) {
+noteBody.addEventListener("input", e => {
   note.body = e.target.value;
   note.updatedAt = moment().valueOf();
   noteUpdated.textContent = generateLastEdited(note.updatedAt);
   saveNotes(notes);
 });
 
-document.querySelector("#removeNote").addEventListener("click", function() {
+document.querySelector("#removeNote").addEventListener("click", () => {
   removeNotes(noteId);
   saveNotes(notes);
   location.assign(`/index.html`);
   renderNotes(notes, filters);
 });
 
-document.querySelector("#backButton").addEventListener("click", function() {
+document.querySelector("#backButton").addEventListener("click", () => {
   location.assign(`/index.html`);
 });
 
-window.addEventListener("storage", function(e) {
+window.addEventListener("storage", e => {
   if (e.key === "notes") {
     notes = JSON.parse(e.newValue);
   }
-  note = notes.find(function(note) {
+  note = notes.find(note => {
     return note.id === noteId;
   });
 
