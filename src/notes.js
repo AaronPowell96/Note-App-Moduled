@@ -29,6 +29,7 @@ const createNote = () => {
         updatedAt: timestamp
     });
     saveNotes();
+    return newId
 }
 
 //Remove note from list
@@ -78,6 +79,22 @@ const sortNotes = (sortBy) => {
         return notes;
     }
 };
+
+const updateNote = (id, updates) => {
+    const note = notes.find((note) => note.id === id)
+    if (!note) return;
+    if (typeof updates.title === "string") {
+        note.title = updates.title
+        note.updatedAt = moment().valueOf()
+        saveNotes();
+    }
+    if (typeof updates.body === "string") {
+        note.body = updates.body
+        note.updatedAt = moment().valueOf()
+        saveNotes();
+    }
+    return note;
+}
 notes = loadNotes();
 
-export { getNotes, createNote, removeNote }
+export { getNotes, createNote, removeNote, sortNotes, updateNote }
