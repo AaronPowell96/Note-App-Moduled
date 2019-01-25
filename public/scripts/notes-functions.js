@@ -1,14 +1,5 @@
 
 
-//Remove note from list
-
-const removeNotes = id => {
-  const noteIndex = notes.findIndex(note => note.id === id);
-
-  if (noteIndex > -1) {
-    notes.splice(noteIndex, 1);
-  }
-};
 
 //Generate notes DOM structure
 
